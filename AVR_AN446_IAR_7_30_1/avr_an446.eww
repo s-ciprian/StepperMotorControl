@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\avr_an446.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\..\060_Microcontrollers_Doc\AVR_STK500\mega16_test.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

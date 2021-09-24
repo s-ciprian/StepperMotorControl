@@ -1,0 +1,15 @@
+"--cpu=m328p" 
+
+"--enhanced_core" 
+
+"-p" 
+
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\avr\Config\iom328p.ddf" 
+
+"--eeprom_size" 
+
+"1024" 
+
+
+
+

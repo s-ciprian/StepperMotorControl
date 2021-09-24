@@ -50,3 +50,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/AVR_AN446_IAR_7_30_1/doxygen
