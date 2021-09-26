@@ -51,3 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 /AVR_AN446_IAR_7_30_1/doxygen
+/AVR_AN446_IAR_7_30_1/Debug/Obj
+/AVR_AN446_IAR_7_30_1/doxyfile
+/AVR_AN446_IAR_7_30_1/HOWTO doxygen.txt
