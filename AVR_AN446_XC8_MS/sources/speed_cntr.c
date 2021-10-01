@@ -21,11 +21,18 @@
  * $Date: 2006/05/08 12:25:58 $
  *****************************************************************************/
 
-#include <ioavr.h>
+//#include <ioavr.h>
+#include "xc.h"
 #include "global.h"
 #include "sm_driver.h"
 #include "speed_cntr.h"
 #include "uart.h"
+
+/************************************************************************/
+/* Local functions prototypes                                           */
+/************************************************************************/
+static unsigned long sqrt_fast(unsigned long v);
+
 
 //! Cointains data for timer interrupt.
 speedRampData srd;
@@ -81,9 +88,9 @@ void speed_cntr_Move(signed int step, unsigned int accel, unsigned int decel, un
     srd.min_delay = A_T_x100 / speed;
 
     // Set accelration by calc the first (c0) step delay .
-    // step_delay = 1/tt * sqrt(2*alpha/accel)
-    // step_delay = ( tfreq*0.676/100 )*100 * sqrt( (2*alpha*10000000000) / (accel*100) )/10000
-    srd.step_delay = (T1_FREQ_148 * sqrt(A_SQ / accel))/100;
+    // step_delay = 1/tt * sqrt_fast(2*alpha/accel)
+    // step_delay = ( tfreq*0.676/100 )*100 * sqrt_fast( (2*alpha*10000000000) / (accel*100) )/10000
+    srd.step_delay = (T1_FREQ_148 * sqrt_fast(A_SQ / accel))/100;
 
     // Find out after how many steps does the speed hit the max speed limit.
     // max_s_lim = speed^2 / (2*alpha*accel)
@@ -160,11 +167,11 @@ void speed_cntr_Init_Timer1(void)
  *  A new step delay is calculated to follow wanted speed profile
  *  on basis of accel/decel parameters.
  */
-#pragma vector=TIMER1_COMPA_vect
-__interrupt void speed_cntr_TIMER1_COMPA_interrupt( void )
+//#pragma vector=TIMER1_COMPA_vect
+void __interrupt(TIMER1_COMPA_vect_num) speed_cntr_TIMER1_COMPA_interrupt( void )
 {
   // Holds next delay period.
-  unsigned int new_step_delay;
+  unsigned int new_step_delay = 0;
   // Remember the last step delay used when accelrating.
   static int last_accel_delay;
   // Counting steps when moving.
@@ -233,7 +240,7 @@ __interrupt void speed_cntr_TIMER1_COMPA_interrupt( void )
 
 /*! \brief Square root routine.
  *
- * sqrt routine 'grupe', from comp.sys.ibm.pc.programmer
+ * sqrt_fast routine 'grupe', from comp.sys.ibm.pc.programmer
  * Subject: Summary: SQRT(int) algorithm (with profiling)
  *    From: warwick@cs.uq.oz.au (Warwick Allison)
  *    Date: Tue Oct 8 09:16:35 1991
@@ -241,7 +248,7 @@ __interrupt void speed_cntr_TIMER1_COMPA_interrupt( void )
  *  \param x  Value to find square root of.
  *  \return  Square root of x.
  */
-static unsigned long sqrt(unsigned long x)
+static unsigned long sqrt_fast(unsigned long x)
 {
   register unsigned long xr;  // result register
   register unsigned long q2;  // scan-bit register

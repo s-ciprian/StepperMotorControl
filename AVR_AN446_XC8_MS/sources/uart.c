@@ -17,7 +17,8 @@
  * $RCSfile: uart.c,v $
  * $Date: 2006/05/08 12:25:58 $
  *****************************************************************************/
-#include <ioavr.h>
+//#include <ioavr.h>
+#include "xc.h"
 #include "global.h"
 #include "uart.h"
 #include "sm_driver.h"
@@ -94,7 +95,7 @@ void uart_SendByte(unsigned char data)
  *
  *  \param Str  String to be sent.
  */
-void uart_SendString(unsigned char Str[])
+void uart_SendString(const unsigned char Str[])
 {
   unsigned char n = 0;
   while(Str[n])
@@ -142,8 +143,8 @@ void uart_FlushRxBuffer(void){
  *  RX interrupt handler.
  *  RX interrupt always enabled.
  */
-#pragma vector=USART_RX_vect
-__interrupt void UART_RX_interrupt( void )
+//#pragma vector=USART_RX_vect
+void __interrupt(USART_RX_vect_num) UART_RX_interrupt( void )
 {
   unsigned char data;
 
@@ -196,8 +197,8 @@ __interrupt void UART_RX_interrupt( void )
  *  TX interrupt turned on by uart_SendByte,
  *  turned off when TX buffer is empty.
  */
-#pragma vector=USART_UDRE_vect
-__interrupt void UART_TX_interrupt( void )
+//#pragma vector=USART_UDRE_vect
+void __interrupt(USART_UDRE_vect_num) UART_TX_interrupt( void )
 {
   unsigned char UART_TxTail_tmp;
    UART_TxTail_tmp = UART_TxTail;

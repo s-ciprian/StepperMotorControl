@@ -38,16 +38,16 @@
 
 void InitUART(void);
 void uart_SendByte(unsigned char data);
-void uart_SendString(unsigned char Tab[]);
+void uart_SendString(const unsigned char Str[]);
 void uart_SendInt(int Tall);
 void uart_FlushRxBuffer(void);
 
 //! Buffer with received string from uart.
 extern unsigned char UART_RxBuffer[UART_RX_BUFFER_SIZE];
 
-#pragma vector=USART_RX_vect
-__interrupt void UART_RX_interrupt( void );
-#pragma vector=USART_UDRE_vect
-__interrupt void UART_TX_interrupt( void );
+//#pragma vector=USART_RX_vect
+//__interrupt void UART_RX_interrupt( void );
+//#pragma vector=USART_UDRE_vect
+//__interrupt void UART_TX_interrupt( void );
 
 #endif

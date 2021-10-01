@@ -21,8 +21,9 @@
  * $Date: 2006/05/08 12:25:58 $
  *****************************************************************************/
 
-#include <ioavr.h>
-#include <inavr.h>
+//#include <ioavr.h>
+//#include <inavr.h>
+#include <xc.h>
 #include <stdlib.h>
 #include "global.h"
 #include "uart.h"
@@ -43,6 +44,12 @@ void Init(void)
 {
   // Init of IO pins
   sm_driver_Init_IO();
+  
+  /* Set all port B outputs register high => The LEDs are all OFF on STK500 board */
+  PORTB = 0xFF;
+  /* Port B - all pins are configured as outputs. */
+  DDRB = 0xFF;
+  
   // Init of uart
   InitUART();
 
@@ -52,7 +59,8 @@ void Init(void)
   // Init of Timer/Counter1
   speed_cntr_Init_Timer1();
 
-  __enable_interrupt();
+  //__enable_interrupt();
+  ei();
 }
 
 /*! \brief Demo of linear speed controller.
@@ -79,23 +87,43 @@ void main(void)
   ShowHelp();
   ShowData(stepPosition, acceleration, deceleration, speed, steps);
 
-  while(1) {
+  /* Turn ON LED0 on STK500 board */
+  //PORTB &= ~0x01;
+  
+  /* Toggle LED0  */
+  //PORTB ^= 0x01;
+  
+  while(1) 
+  {
+     /* Turn ON LED0 on STK500 board */
+     //PORTB &= ~0x01;
+ 
+     /* Toggle LED0  */
+     PORTB ^= 0x01;
+
     // If a command is received, check the command and act on it.
-    if(status.cmd == TRUE){
-      if(UART_RxBuffer[0] == 'm'){
+    if(status.cmd == TRUE)
+    {
+      if(UART_RxBuffer[0] == 'm')
+      {
         // Move with...
-        if(UART_RxBuffer[1] == ' '){
+        if(UART_RxBuffer[1] == ' ')
+        {
           // ...number of steps given.
           steps = atoi((char const *)UART_RxBuffer+2);
           speed_cntr_Move(steps, acceleration, deceleration, speed);
           okCmd = TRUE;
           uart_SendString("\n\r  ");
         }
-        else if(UART_RxBuffer[1] == 'o'){
-          if(UART_RxBuffer[2] == 'v'){
-            if(UART_RxBuffer[3] == 'e'){
+        else if(UART_RxBuffer[1] == 'o')
+        {
+          if(UART_RxBuffer[2] == 'v')
+          {
+            if(UART_RxBuffer[3] == 'e')
+            {
               // ...all parameters given
-              if(UART_RxBuffer[4] == ' '){
+              if(UART_RxBuffer[4] == ' ')
+              {
                 int i = 6;
                 steps = atoi((char const *)UART_RxBuffer+5);
                 while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
@@ -115,38 +143,48 @@ void main(void)
           }
         }
       }
-      else if(UART_RxBuffer[0] == 'a'){
+      else if(UART_RxBuffer[0] == 'a')
+      {
         // Set acceleration.
-        if(UART_RxBuffer[1] == ' '){
+        if(UART_RxBuffer[1] == ' ')
+        {
           acceleration = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
-      else if(UART_RxBuffer[0] == 'd'){
+      else if(UART_RxBuffer[0] == 'd')
+      {
         // Set deceleration.
-        if(UART_RxBuffer[1] == ' '){
+        if(UART_RxBuffer[1] == ' ')
+        {
           deceleration = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
-      else if(UART_RxBuffer[0] == 's'){
-        if(UART_RxBuffer[1] == ' '){
+      else if(UART_RxBuffer[0] == 's')
+      {
+        if(UART_RxBuffer[1] == ' ')
+        {
           speed = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
-      else if(UART_RxBuffer[0] == 13){
+      else if(UART_RxBuffer[0] == 13)
+      {
         speed_cntr_Move(steps, acceleration, deceleration, speed);
         okCmd = TRUE;
       }
-      else if(UART_RxBuffer[0] == '?'){
+      else if(UART_RxBuffer[0] == '?')
+      {
         ShowHelp();
         okCmd = TRUE;
       }
 
       // Send help if invalid command is received.
       if(okCmd != TRUE)
+      {
         ShowHelp();
+      }
 
       // Clear RXbuffer.
       status.cmd = FALSE;
@@ -160,11 +198,15 @@ void main(void)
 
       ShowData(stepPosition, acceleration, deceleration, speed, steps);
     }//end if(cmd)
+    else
+    {
+        /* No command received - nothing to do */
+    }
   }//end while(1)
 }
 
 //! Help message
-__flash char Help[] = {"\n\r--------------------------------------------------------------\n\rAtmel AVR446 - Linear speed control of stepper motor\n\r\n\r?        - Show help\n\ra [data] - Set acceleration (range: 71 - 32000)\n\rd [data] - Set deceleration (range: 71 - 32000)\n\rs [data] - Set speed (range: 12 - motor limit)\n\rm [data] - Move [data] steps (range: -64000 - 64000)\n\rmove [steps] [accel] [decel] [speed]\n\r         - Move with all parameters given\n\r<enter>  - Repeat last move\n\r\n\r    acc/dec data given in 0.01*rad/sec^2 (100 = 1 rad/sec^2)\n\r    speed data given in 0.01*rad/sec (100 = 1 rad/sec)\n\r--------------------------------------------------------------\n\r"};
+const char Help[] = {"\n\r--------------------------------------------------------------\n\rAtmel AVR446 - Linear speed control of stepper motor\n\r\n\r?        - Show help\n\ra [data] - Set acceleration (range: 71 - 32000)\n\rd [data] - Set deceleration (range: 71 - 32000)\n\rs [data] - Set speed (range: 12 - motor limit)\n\rm [data] - Move [data] steps (range: -64000 - 64000)\n\rmove [steps] [accel] [decel] [speed]\n\r         - Move with all parameters given\n\r<enter>  - Repeat last move\n\r\n\r    acc/dec data given in 0.01*rad/sec^2 (100 = 1 rad/sec^2)\n\r    speed data given in 0.01*rad/sec (100 = 1 rad/sec)\n\r--------------------------------------------------------------\n\r"};
 
 /*! \brief Sends help message.
  *

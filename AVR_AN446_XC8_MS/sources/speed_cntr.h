@@ -84,7 +84,6 @@ typedef struct {
 
 void speed_cntr_Move(signed int step, unsigned int accel, unsigned int decel, unsigned int speed);
 void speed_cntr_Init_Timer1(void);
-static unsigned long sqrt(unsigned long v);
 unsigned int min(unsigned int x, unsigned int y);
 
 //! Global status flags
