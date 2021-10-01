@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --backend -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
+& "D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --backend -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
 }
 else
 {
-& "D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
+& "D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
 }

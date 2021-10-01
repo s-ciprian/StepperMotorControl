@@ -5,129 +5,77 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\uart.c</file>
-            <file>$TOOLKIT_DIR$\inc\inavr.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.r90</file>
-            <file>$TOOLKIT_DIR$\inc\iom328p.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\sm_driver.r90</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\sm_driver.h</file>
+            <file>$PROJ_DIR$\sm_driver.c</file>
+            <file>$PROJ_DIR$\speed_cntr.c</file>
             <file>$PROJ_DIR$\speed_cntr.h</file>
-            <file>$TOOLKIT_DIR$\inc\ioavr.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\uart.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.xcl</file>
-            <file>$PROJ_DIR$\Debug\Obj\uart.r90</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\sm_driver.xcl</file>
+            <file>$PROJ_DIR$\global.h</file>
+            <file>$PROJ_DIR$\uart.c</file>
             <file>$PROJ_DIR$\uart.h</file>
-            <file>$TOOLKIT_DIR$\lib\dlib\dlAVR-3s-ec_mul-sf-n.r90</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.r90</file>
+            <file>$TOOLKIT_DIR$\inc\inavr.h</file>
+            <file>$TOOLKIT_DIR$\inc\iom328p.h</file>
             <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\sm_driver.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\sm_driver.xcl</file>
+            <file>$TOOLKIT_DIR$\src\template\cfg3soim.xcl</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+            <file>$TOOLKIT_DIR$\inc\ioavr.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\sm_driver.r90</file>
+            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.xcl</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dlAVR-3s-ec_mul-sf-n.r90</file>
             <file>$TOOLKIT_DIR$\lib\dlib\dlAVR-3s-ec_mul-sf-n.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\uart.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+            <file>$TOOLKIT_DIR$\src\template\cfgm328p.xcl</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
             <file>$TOOLKIT_DIR$\inc\bitdefinitions\iom328p.inc</file>
             <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
-            <file>$TOOLKIT_DIR$\src\template\cfg3soim.xcl</file>
-            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.r90</file>
-            <file>$PROJ_DIR$\Debug\List\avr_an446.map</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
-            <file>$TOOLKIT_DIR$\src\template\cfgm328p.xcl</file>
-            <file>$PROJ_DIR$\Debug\Obj\avr_an446.pbd</file>
-            <file>$PROJ_DIR$\Debug\Exe\avr_an446.d90</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\sm_driver.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
             <file>$TOOLKIT_DIR$\inc\iomacro.h</file>
             <file>$PROJ_DIR$\Debug\Obj\uart.xcl</file>
-            <file>$PROJ_DIR$\speed_cntr.c</file>
-            <file>$PROJ_DIR$\main.c</file>
-            <file>$PROJ_DIR$\sm_driver.c</file>
-            <file>$PROJ_DIR$\global.h</file>
-            <file>$PROJ_DIR$\sm_driver.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\avr_an446.pbd</file>
+            <file>$PROJ_DIR$\Debug\Obj\uart.r90</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\Debug\List\avr_an446.map</file>
+            <file>$PROJ_DIR$\Debug\Obj\speed_cntr.r90</file>
+            <file>$PROJ_DIR$\Debug\Exe\avr_an446.d90</file>
         </outputs>
         <file>
-            <name>$PROJ_DIR$\uart.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCAVR</name>
-                    <file> 13</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 10</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 35</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCAVR</name>
-                    <file> 7 3 34 25 39 17 40 6</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Debug\Exe\avr_an446.d90</name>
+            <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>XLINK</name>
-                    <file> 29</file>
+                    <file> 38 40</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>XLINK</name>
-                    <file> 31 27 2 4 28 13 18</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\speed_cntr.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCAVR</name>
-                    <file> 28</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 8</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 12</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCAVR</name>
-                    <file> 7 3 34 25 39 40 6 17</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\main.c</name>
             <outputs>
                 <tool>
                     <name>ICCAVR</name>
-                    <file> 2</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 24</file>
+                    <file> 8</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 14</file>
+                    <file> 26</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 29</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCAVR</name>
-                    <file> 7 3 34 25 1 11 15 26 30 20 23 21 19 5 9 39 17 40 6</file>
+                    <file> 15 10 32 27 9 31 24 28 36 37 19 11 25 22 14 5 7 1 4</file>
                 </tool>
             </inputs>
         </file>
@@ -136,32 +84,84 @@
             <outputs>
                 <tool>
                     <name>ICCAVR</name>
-                    <file> 4</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 22</file>
+                    <file> 16</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 16</file>
+                    <file> 12</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 30</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCAVR</name>
-                    <file> 7 3 34 25 39 40</file>
+                    <file> 15 10 32 27 5 1</file>
                 </tool>
             </inputs>
         </file>
         <file>
-            <name>[ROOT_NODE]</name>
+            <name>$PROJ_DIR$\speed_cntr.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCAVR</name>
+                    <file> 39</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 17</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 21</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCAVR</name>
+                    <file> 15 10 32 27 5 1 4 7</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\uart.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCAVR</name>
+                    <file> 35</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 33</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 20</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCAVR</name>
+                    <file> 15 10 32 27 5 7 1 4</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\avr_an446.d90</name>
             <outputs>
                 <tool>
                     <name>XLINK</name>
-                    <file> 33 29</file>
+                    <file> 38</file>
                 </tool>
             </outputs>
+            <inputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 23 13 8 16 39 35 18</file>
+                </tool>
+            </inputs>
         </file>
         <forcedrebuild>
             <name>[REBUILD_ALL]</name>

@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --backend -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" --backend -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\work\Projects\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\Projects\StepperMotorControl\AVR_AN446_IAR_7_30_1\settings\avr_an446.Debug.driver.xcl" 
 
 @echo off 
 :end
