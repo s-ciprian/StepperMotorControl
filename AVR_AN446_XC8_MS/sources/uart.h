@@ -38,7 +38,7 @@
 
 void InitUART(void);
 void uart_SendByte(unsigned char data);
-void uart_SendString(const unsigned char Str[]);
+void uart_SendString(const char * const Str);
 void uart_SendInt(int Tall);
 void uart_FlushRxBuffer(void);
 

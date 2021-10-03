@@ -95,11 +95,14 @@ void uart_SendByte(unsigned char data)
  *
  *  \param Str  String to be sent.
  */
-void uart_SendString(const unsigned char Str[])
+void uart_SendString(const char * const Str)
 {
   unsigned char n = 0;
+  
   while(Str[n])
+  {
     uart_SendByte(Str[n++]);
+  }    
 }
 
 /*! \brief Sends a integer.
@@ -198,10 +201,10 @@ void __interrupt(USART_RX_vect_num) UART_RX_interrupt( void )
  *  turned off when TX buffer is empty.
  */
 //#pragma vector=USART_UDRE_vect
-void __interrupt(USART_UDRE_vect_num) UART_TX_interrupt( void )
+void __interrupt(USART_UDRE_vect_num) UART_DataRegEmpty_interrupt(void)
 {
   unsigned char UART_TxTail_tmp;
-   UART_TxTail_tmp = UART_TxTail;
+  UART_TxTail_tmp = UART_TxTail;
 
   // Check if all data is transmitted
   if ( UART_TxHead !=  UART_TxTail_tmp )
@@ -211,9 +214,23 @@ void __interrupt(USART_UDRE_vect_num) UART_TX_interrupt( void )
     // Store new index
     UART_TxTail =  UART_TxTail_tmp;
     // Start transmition
-    UDR0= UART_TxBuffer[ UART_TxTail_tmp];
+    UDR0 = UART_TxBuffer[UART_TxTail_tmp];
   }
   else
+  {
     // Disable UDRE interrupt
     CLR_UDRIE;
+  }    
+}
+
+/*! \brief TX interrupt handler.
+ *
+ *  TX interrupt handler.
+ *  This function is here because the TX Interrupt was enabled in Init() function
+ */
+void __interrupt(USART_TX_vect_num) UART0_TX_interrupt_XXX(void)
+{
+    /* Nothing to do here */
+    volatile unsigned int test = 0;
+    test++;
 }

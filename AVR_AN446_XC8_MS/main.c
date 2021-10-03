@@ -24,7 +24,9 @@
 //#include <ioavr.h>
 //#include <inavr.h>
 #include <xc.h>
+#include <avr/interrupt.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "global.h"
 #include "uart.h"
 #include "sm_driver.h"
@@ -32,6 +34,8 @@
 
 //! Global status flags
 struct GLOBAL_FLAGS status = {FALSE, FALSE, 0};
+    
+unsigned long int i = 0;
 
 void ShowHelp(void);
 void ShowData(int position, int acceleration, int deceleration, int speed, int steps);
@@ -82,6 +86,9 @@ void main(void)
 
   Init();
 
+  /* Turn ON LED0 on STK500 board */
+  PORTB &= ~0x01;
+
   // Outputs help screen.
   uart_SendString("\n\r");
   ShowHelp();
@@ -92,6 +99,12 @@ void main(void)
   
   /* Toggle LED0  */
   //PORTB ^= 0x01;
+
+  for (i=0; i<1000; i++)
+  {
+      /* Test */
+      PORTB ^= 0x02;
+  }
   
   while(1) 
   {
@@ -243,6 +256,35 @@ void ShowData(int position, int acceleration, int deceleration, int speed, int s
   uart_SendInt(steps);
   uart_SendString("\n\r> ");
 }
+
+/*! \brief Undefined interrupts handler - user defined
+ *
+ * Process any undefined interrupts.
+ * Without this function defined, an undefined interrupt will trigger a device reset.
+ * 
+ * This should not happen but in case it is happen, for debug purpose, the application
+ * will stop in this function.
+ */
+ISR(BADISR_vect)
+{
+    volatile uint8_t cnt = 0;
+    
+    /* Loop forever */
+    while(1)
+    {
+        /* DO nothing */
+        
+        /* Increment a counter */
+        cnt++;
+        
+        /* If maximum value reached, reset counter */
+        if(cnt >= UINT8_MAX)
+        {
+            cnt = 0u;
+        }            
+    }
+}
+
 
 /*! \mainpage
  * \section Intro Introduction
