@@ -228,9 +228,9 @@ void __interrupt(USART_UDRE_vect_num) UART_DataRegEmpty_interrupt(void)
  *  TX interrupt handler.
  *  This function is here because the TX Interrupt was enabled in Init() function
  */
-void __interrupt(USART_TX_vect_num) UART0_TX_interrupt_XXX(void)
+void __interrupt(USART_TX_vect_num) UART0_TX_interrupt(void)
 {
     /* Nothing to do here */
-    volatile unsigned int test = 0;
+    volatile unsigned char test = 0;
     test++;
 }

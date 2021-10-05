@@ -179,6 +179,9 @@ void __interrupt(TIMER1_COMPA_vect_num) speed_cntr_TIMER1_COMPA_interrupt( void 
   // Keep track of remainder from new_step-delay calculation to incrase accurancy
   static unsigned int rest = 0;
 
+  /* Toggle LED0  */
+  PORTB ^= (1u << PORTB5);
+
   OCR1A = srd.step_delay;
 
   switch(srd.run_state) {

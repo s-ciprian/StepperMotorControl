@@ -104,7 +104,7 @@ void main(void)
      //PORTB &= ~0x01;
 	 
 	 /* Toggle LED0  */
- 	 PORTB ^= (1u << PORTB5);
+ 	 //PORTB ^= (1u << PORTB5);
 		
     // If a command is received, check the command and act on it.
     if(status.cmd == TRUE)

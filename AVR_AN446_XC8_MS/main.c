@@ -97,8 +97,8 @@ void main(void)
   /* Turn ON LED0 on STK500 board */
   //PORTB &= ~0x01;
   
-  /* Toggle LED0  */
-  //PORTB ^= 0x01;
+  /* Toggle LED0 on STK500 board */
+  PORTB ^= 0x01;
 
   for (i=0; i<1000; i++)
   {
@@ -108,11 +108,11 @@ void main(void)
   
   while(1) 
   {
-     /* Turn ON LED0 on STK500 board */
-     //PORTB &= ~0x01;
+    /* Turn ON LED0 on STK500 board */
+    //PORTB &= ~0x01;
  
-     /* Toggle LED0  */
-     PORTB ^= 0x01;
+    /* Toggle LED0 on STK500 board  */
+    //PORTB ^= 0x01;
 
     // If a command is received, check the command and act on it.
     if(status.cmd == TRUE)

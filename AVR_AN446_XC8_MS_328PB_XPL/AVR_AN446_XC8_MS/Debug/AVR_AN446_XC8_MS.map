@@ -602,28 +602,28 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x211c
+.debug_info     0x0000000000000000     0x211f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x8ea C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/xc8/avr/lib/avr5/memx-const/crtatmega328pb.o
  .debug_info    0x00000000000008ea      0x918 main.o
  .debug_info    0x0000000000001202      0x366 sources/sm_driver.o
- .debug_info    0x0000000000001568      0x5c7 sources/speed_cntr.o
- .debug_info    0x0000000000001b2f      0x5ed sources/uart.o
+ .debug_info    0x0000000000001568      0x5ca sources/speed_cntr.o
+ .debug_info    0x0000000000001b32      0x5ed sources/uart.o
 
-.debug_abbrev   0x0000000000000000      0xda4
+.debug_abbrev   0x0000000000000000      0xdb3
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x86e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/xc8/avr/lib/avr5/memx-const/crtatmega328pb.o
  .debug_abbrev  0x000000000000086e      0x1a9 main.o
  .debug_abbrev  0x0000000000000a17       0xca sources/sm_driver.o
- .debug_abbrev  0x0000000000000ae1      0x177 sources/speed_cntr.o
- .debug_abbrev  0x0000000000000c58      0x14c sources/uart.o
+ .debug_abbrev  0x0000000000000ae1      0x186 sources/speed_cntr.o
+ .debug_abbrev  0x0000000000000c67      0x14c sources/uart.o
 
 .debug_line     0x0000000000000000      0xbf3
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x1a9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/xc8/avr/lib/avr5/memx-const/crtatmega328pb.o
- .debug_line    0x00000000000001a9      0x396 main.o
- .debug_line    0x000000000000053f       0xfb sources/sm_driver.o
- .debug_line    0x000000000000063a      0x324 sources/speed_cntr.o
+ .debug_line    0x00000000000001a9      0x390 main.o
+ .debug_line    0x0000000000000539       0xfb sources/sm_driver.o
+ .debug_line    0x0000000000000634      0x32a sources/speed_cntr.o
  .debug_line    0x000000000000095e      0x295 sources/uart.o
 
 .debug_frame    0x0000000000000000      0x39c
@@ -753,22 +753,22 @@ LOAD data_init
  .text.avrlibc  0x00000000000003e4      0x2dc c:/program files/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(strtol.o)
                 0x00000000000003e4                strtol
 
-.text.main      0x00000000000006c0      0x282
- .text.main     0x00000000000006c0      0x282 main.o
+.text.main      0x00000000000006c0      0x27a
+ .text.main     0x00000000000006c0      0x27a main.o
                 0x00000000000006c0                main
 
-.text.speed_cntr_Move
-                0x0000000000000942      0x268
- .text.speed_cntr_Move
-                0x0000000000000942      0x268 sources/speed_cntr.o
-                0x0000000000000942                speed_cntr_Move
-
 .text.speed_cntr_TIMER1_COMPA_interrupt
-                0x0000000000000baa      0x266
+                0x000000000000093a      0x26e
  .text.speed_cntr_TIMER1_COMPA_interrupt
-                0x0000000000000baa      0x266 sources/speed_cntr.o
-                0x0000000000000baa                speed_cntr_TIMER1_COMPA_interrupt
-                0x0000000000000baa                __vector_11
+                0x000000000000093a      0x26e sources/speed_cntr.o
+                0x000000000000093a                speed_cntr_TIMER1_COMPA_interrupt
+                0x000000000000093a                __vector_11
+
+.text.speed_cntr_Move
+                0x0000000000000ba8      0x268
+ .text.speed_cntr_Move
+                0x0000000000000ba8      0x268 sources/speed_cntr.o
+                0x0000000000000ba8                speed_cntr_Move
 
 .text.UART_RX_interrupt
                 0x0000000000000e10       0xce
