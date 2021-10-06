@@ -102,18 +102,18 @@ void main(void)
   {
      /* Turn ON LED0 on STK500 board */
      //PORTB &= ~0x01;
-	 
-	 /* Toggle LED0  */
- 	 //PORTB ^= (1u << PORTB5);
-		
+ 
+     /* Toggle LED0  */
+     //PORTB ^= (1u << PORTB5);
+
     // If a command is received, check the command and act on it.
     if(status.cmd == TRUE)
-	{	
+    {
       if(UART_RxBuffer[0] == 'm')
-	  {
+      {
         // Move with...
         if(UART_RxBuffer[1] == ' ')
-		{
+        {
           // ...number of steps given.
           steps = atoi((char const *)UART_RxBuffer+2);
           speed_cntr_Move(steps, acceleration, deceleration, speed);
@@ -121,14 +121,14 @@ void main(void)
           uart_SendString("\n\r  ");
         }
         else if(UART_RxBuffer[1] == 'o')
-		{
+        {
           if(UART_RxBuffer[2] == 'v')
-		  {
+          {
             if(UART_RxBuffer[3] == 'e')
-			{
+            {
               // ...all parameters given
               if(UART_RxBuffer[4] == ' ')
-			  {
+              {
                 int i = 6;
                 steps = atoi((char const *)UART_RxBuffer+5);
                 while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
@@ -149,47 +149,47 @@ void main(void)
         }
       }
       else if(UART_RxBuffer[0] == 'a')
-	  {
+      {
         // Set acceleration.
         if(UART_RxBuffer[1] == ' ')
-		{
+        {
           acceleration = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
       else if(UART_RxBuffer[0] == 'd')
-	  {
+      {
         // Set deceleration.
         if(UART_RxBuffer[1] == ' ')
-		{
+        {
           deceleration = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
       else if(UART_RxBuffer[0] == 's')
-	  {
+      {
         if(UART_RxBuffer[1] == ' ')
-		{
+        {
           speed = atoi((char const *)UART_RxBuffer+2);
           okCmd = TRUE;
         }
       }
       else if(UART_RxBuffer[0] == 13)
-	  {
+      {
         speed_cntr_Move(steps, acceleration, deceleration, speed);
         okCmd = TRUE;
       }
       else if(UART_RxBuffer[0] == '?')
-	  {
+      {
         ShowHelp();
         okCmd = TRUE;
       }
 
       // Send help if invalid command is received.
       if(okCmd != TRUE)
-	  {
+      {
         ShowHelp();
-	  }
+      }
 
       // Clear RXbuffer.
       status.cmd = FALSE;
@@ -203,10 +203,10 @@ void main(void)
 
       ShowData(stepPosition, acceleration, deceleration, speed, steps);
     }//end if(cmd)
-	else
-	{
+    else
+    {
         /* No command received - nothing to do */
-	}
+    }
   }//end while(1)
 }
 

@@ -47,10 +47,19 @@ typedef struct {
 /*! \Brief Frequency of timer1 in [Hz].
  *
  * Modify this according to frequency used. Because of the prescaler setting,
- * the timer1 frequency is the clock frequency divided by 8.
+ * the timer1 frequency is the clock frequency divided by 8 or 64.
+ * 
+ * On 328PB Xplained board the frequency (when running at 5V) is 16 MHz
+ * The Timer prescaler was set to 64 - TCCR1B
  */
+/* This configuration is used on STK500 board. */
+#if 0
 // Timer/Counter 1 running on 3,686MHz / 8 = 460,75kHz (2,17uS). (T1-FREQ 460750)
 #define T1_FREQ 460750
+#endif
+/* This configuration used on 328PB Xplained board running at 16 MHz (5V MCU power supply)
+   Timer/Counter 1 running on 16 MHz / 64 = 250000 Hz = 250 kHz (4 uS). (T1-FREQ 250000) */
+#define T1_FREQ 250000
 
 //! Number of (full)steps per round on stepper motor in use.
 #define FSPR 200

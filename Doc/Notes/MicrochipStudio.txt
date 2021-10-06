@@ -1,0 +1,3 @@
+
+How turn "show whitespace"
+CTRL+R followed by CTRL+W
