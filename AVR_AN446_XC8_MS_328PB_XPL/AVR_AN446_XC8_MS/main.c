@@ -71,143 +71,176 @@ void Init(void)
  */
 void main(void)
 {
-  // Number of steps to move.
-  int steps = 1000;
-  // Accelration to use.
-  int acceleration = 100;
-  // Deceleration to use.
-  int deceleration = 100;
-  // Speed to use.
-  int speed = 800;
-  // Tells if the received string was a valid command.
-  char okCmd = FALSE;
+    // Number of steps to move.
+    int steps = 1000;
+    // Accelration to use.
+    int acceleration = 100;
+    // Deceleration to use.
+    int deceleration = 100;
+    // Speed to use.
+    int speed = 800;
+    // Tells if the received string was a valid command.
+    char okCmd = FALSE;
 
-  Init();
+    Init();
 
-  /* Set PB0 High  */
-  PORTB |= (1u << PORTB0);
+    /* Set PB0 High  */
+    PORTB |= (1u << PORTB0);
 
-  // Outputs help screen.
-  uart_SendString("\n\r");
-  ShowHelp();
-  ShowData(stepPosition, acceleration, deceleration, speed, steps);
+    // Outputs help screen.
+    uart_SendString("\n\r");
+    ShowHelp();
+    ShowData(stepPosition, acceleration, deceleration, speed, steps);
 
-  /* Turn ON LED0 on STK500 board */
-  //PORTB &= ~0x01;
-  
-  /* Set PB0 low  */
-  PORTB &= ~(1u << PORTB0);
-  
-  while(1) 
-  {
-     /* Turn ON LED0 on STK500 board */
-     //PORTB &= ~0x01;
- 
-     /* Toggle LED0  */
-     //PORTB ^= (1u << PORTB5);
-
-    // If a command is received, check the command and act on it.
-    if(status.cmd == TRUE)
+    /* Turn ON LED0 on STK500 board */
+    //PORTB &= ~0x01;
+    
+    /* Set PB0 low  */
+    PORTB &= ~(1u << PORTB0);
+    
+    while(1)
     {
-      if(UART_RxBuffer[0] == 'm')
-      {
-        // Move with...
-        if(UART_RxBuffer[1] == ' ')
+        /* Turn ON LED0 on STK500 board */
+        //PORTB &= ~0x01;
+        
+        /* Toggle LED0  */
+        //PORTB ^= (1u << PORTB5);
+
+        // If a command is received, check the command and act on it.
+        if(status.cmd == TRUE)
         {
-          // ...number of steps given.
-          steps = atoi((char const *)UART_RxBuffer+2);
-          speed_cntr_Move(steps, acceleration, deceleration, speed);
-          okCmd = TRUE;
-          uart_SendString("\n\r  ");
-        }
-        else if(UART_RxBuffer[1] == 'o')
-        {
-          if(UART_RxBuffer[2] == 'v')
-          {
-            if(UART_RxBuffer[3] == 'e')
+            /******************************************************************************/
+            /* Parse received string                                                      */
+            /*                                                                            */
+            /* Valid inputs strings are:                                                  */
+            /*  1) "m [steps]",  -64000 < steps < 64000                                   */
+            /*  2) "move [steps] [accel] [decel] [speed]"                                 */
+            /*  3) "a [accel]"                                                            */
+            /*  4) "d [decel]"                                                            */
+            /*  5) "s [speed]"                                                            */
+            /*  6) 'Enter'                                                                */
+            /*  7) '?'                                                                    */
+            /* Any other string/character except above is considered error and Help       */
+            /* message is printed.                                                        */
+            /* [value] represents a number, limits are printed in help                    */
+            /******************************************************************************/
+            /* Check first character received: if it is 'm' */
+            if(UART_RxBuffer[0] == 'm')
             {
-              // ...all parameters given
-              if(UART_RxBuffer[4] == ' ')
-              {
-                int i = 6;
-                steps = atoi((char const *)UART_RxBuffer+5);
-                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
-                i++;
-                acceleration = atoi((char const *)UART_RxBuffer+i);
-                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
-                i++;
-                deceleration = atoi((char const *)UART_RxBuffer+i);
-                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
-                i++;
-                speed = atoi((char const *)UART_RxBuffer+i);
+                // Move with...
+                if(UART_RxBuffer[1] == ' ')
+                {
+                    // ...number of steps given.
+                    steps = atoi((char const *)UART_RxBuffer+2);
+                    speed_cntr_Move(steps, acceleration, deceleration, speed);
+                    okCmd = TRUE;
+                    uart_SendString("\n\r  ");
+                }
+                else if(UART_RxBuffer[1] == 'o')
+                {
+                    if(UART_RxBuffer[2] == 'v')
+                    {
+                        if(UART_RxBuffer[3] == 'e')
+                        {
+                            // ...all parameters given
+                            if(UART_RxBuffer[4] == ' ')
+                            {
+                                int i = 6;
+                                steps = atoi((char const *)UART_RxBuffer+5);
+                                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
+                                i++;
+                                acceleration = atoi((char const *)UART_RxBuffer+i);
+                                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
+                                i++;
+                                deceleration = atoi((char const *)UART_RxBuffer+i);
+                                while((UART_RxBuffer[i] != ' ') && (UART_RxBuffer[i] != 13)) i++;
+                                i++;
+                                speed = atoi((char const *)UART_RxBuffer+i);
+                                speed_cntr_Move(steps, acceleration, deceleration, speed);
+                                okCmd = TRUE;
+                                uart_SendString("\n\r  ");
+                            }
+                        }
+                    }
+                }
+            } /* END "if(UART_RxBuffer[0] == 'm')" */
+            else if(UART_RxBuffer[0] == 'a')
+            {
+                // Set acceleration.
+                if(UART_RxBuffer[1] == ' ')
+                {
+                    acceleration = atoi((char const *)UART_RxBuffer+2);
+                    okCmd = TRUE;
+                }
+            }
+            else if(UART_RxBuffer[0] == 'd')
+            {
+                // Set deceleration.
+                if(UART_RxBuffer[1] == ' ')
+                {
+                    deceleration = atoi((char const *)UART_RxBuffer+2);
+                    okCmd = TRUE;
+                }
+            }
+            else if(UART_RxBuffer[0] == 's')
+            {
+                if(UART_RxBuffer[1] == ' ')
+                {
+                    speed = atoi((char const *)UART_RxBuffer+2);
+                    okCmd = TRUE;
+                }
+            }
+            else if(UART_RxBuffer[0] == 13)
+            {
                 speed_cntr_Move(steps, acceleration, deceleration, speed);
                 okCmd = TRUE;
-                uart_SendString("\n\r  ");
-              }
             }
-          }
-        }
-      }
-      else if(UART_RxBuffer[0] == 'a')
-      {
-        // Set acceleration.
-        if(UART_RxBuffer[1] == ' ')
+            else if(UART_RxBuffer[0] == '?')
+            {
+                ShowHelp();
+                okCmd = TRUE;
+            }
+
+            // Send help if invalid command is received.
+            if(okCmd != TRUE)
+            {
+                ShowHelp();
+            }
+            
+            /************************************************************************/
+            /* END of user input parsing                                            */
+            /************************************************************************/
+            
+            
+            // Clear RXbuffer.
+            status.cmd = FALSE;
+            uart_FlushRxBuffer();
+
+
+            /*****************************************************************************************/
+            /* Command execution loop. Control blocks here until the last parsed command is executed */
+            /*****************************************************************************************/
+            if(status.running == TRUE)
+            {
+                uart_SendString("Running...");
+                
+                while(status.running == TRUE)
+                {
+                    /* Wait until the current command is finished. */
+                    ;
+                }
+                                    
+                uart_SendString("OK\n\r");
+            }
+
+            /* Print current data */
+            ShowData(stepPosition, acceleration, deceleration, speed, steps);
+        }//end "if(status.cmd == TRUE)"
+        else
         {
-          acceleration = atoi((char const *)UART_RxBuffer+2);
-          okCmd = TRUE;
+            /* No command received - nothing to do */
         }
-      }
-      else if(UART_RxBuffer[0] == 'd')
-      {
-        // Set deceleration.
-        if(UART_RxBuffer[1] == ' ')
-        {
-          deceleration = atoi((char const *)UART_RxBuffer+2);
-          okCmd = TRUE;
-        }
-      }
-      else if(UART_RxBuffer[0] == 's')
-      {
-        if(UART_RxBuffer[1] == ' ')
-        {
-          speed = atoi((char const *)UART_RxBuffer+2);
-          okCmd = TRUE;
-        }
-      }
-      else if(UART_RxBuffer[0] == 13)
-      {
-        speed_cntr_Move(steps, acceleration, deceleration, speed);
-        okCmd = TRUE;
-      }
-      else if(UART_RxBuffer[0] == '?')
-      {
-        ShowHelp();
-        okCmd = TRUE;
-      }
-
-      // Send help if invalid command is received.
-      if(okCmd != TRUE)
-      {
-        ShowHelp();
-      }
-
-      // Clear RXbuffer.
-      status.cmd = FALSE;
-      uart_FlushRxBuffer();
-
-      if(status.running == TRUE){
-        uart_SendString("Running...");
-        while(status.running == TRUE);
-        uart_SendString("OK\n\r");
-      }
-
-      ShowData(stepPosition, acceleration, deceleration, speed, steps);
-    }//end if(cmd)
-    else
-    {
-        /* No command received - nothing to do */
-    }
-  }//end while(1)
+    }//end while(1)
 }
 
 //! Help message
